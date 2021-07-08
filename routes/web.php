@@ -22,3 +22,7 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::resource('item', \App\Http\Controllers\ItemsController::class);
+
+Route::get('getUser', [App\Http\Controllers\ItemsController::class, 'getUser']);
+
+Route::get('getItem', [App\Http\Controllers\ItemsController::class, 'getItem']);

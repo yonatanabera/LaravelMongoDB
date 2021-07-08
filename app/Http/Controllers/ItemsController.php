@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Item; 
 use Session; 
 class ItemsController extends Controller
@@ -43,7 +44,14 @@ class ItemsController extends Controller
             'type'=>'required',
             'qty'=>'required|min:0|int'
         ]);
-        Item::create($request->all());
+        // return Auth::user()->_id;
+        $items=[
+            'name'=>$request->name,
+            'type'=>$request->type,
+            'qty'=>$request->qty,
+            'user_id'=>Auth::user()->_id,
+        ];
+        Item::create($items);
         
         // You can also use this way
         /*
@@ -109,5 +117,13 @@ class ItemsController extends Controller
         Item::find($id)->delete();
         return redirect(route('item.index'))->with('message', 'Item deleted successfully');
         
+    }
+
+    public function getUser(){
+        return Item::first()->user;
+    }
+
+    public function getItem(){
+        return Auth::user()->item;
     }
 }

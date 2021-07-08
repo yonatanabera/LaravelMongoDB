@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
 use Illuminate\Auth\Authenticatable as AuthenticatableTrait;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticableContract;
+use \App\Models\Item;
 
 class User extends Eloquent implements AuthenticableContract
 {
@@ -46,4 +47,8 @@ class User extends Eloquent implements AuthenticableContract
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function item(){
+        return $this->belongsTo(Item::class, '_id', 'user_id');
+    }
 }
