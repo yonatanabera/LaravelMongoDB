@@ -17,45 +17,51 @@
 
 <p>Use this link to include into your laravel project. </p>
 
-composer require realrashid/sweet-alert
+`composer require realrashid/sweet-alert`
 
 <p> Then add the following code into config/app service provider </p>
 
-RealRashid\SweetAlert\SweetAlertServiceProvider::class,
+`RealRashid\SweetAlert\SweetAlertServiceProvider::class,`
 
 <p> Then add the following code to aliases </p>
 
-'Alert' => RealRashid\SweetAlert\Facades\Alert::class,
+`'Alert' => RealRashid\SweetAlert\Facades\Alert::class,`
 
 <p>include the sweet alert, using this code into your main view/layout</p>
 
-@include('sweetalert::alert')
+`@include('sweetalert::alert')`
 
 <p>publish the sweet alert using this command </p>
 
-php artisan sweetalert:publish
+`php artisan sweetalert:publish`
 
 <p> To use, you can import in your control and use as follow </p>
 
-use RealRashid\SweetAlert\Facades\Alert;
+`use RealRashid\SweetAlert\Facades\Alert;`
 
 or
 
-Use Alert;
+`Use Alert;`
 
 <p>In your controller method use</p>
-```
-Alert::alert('Title', 'Message', 'Type');
-```
-Alert::success('Success Title', 'Success Message');
-Alert::warning('Warning Title', 'Warning Message');
-Alert::error('Error Title', 'Error Message');
-Alert::question('Question Title', 'Question Message');
-Alert::toast('Toast Message', 'Toast Type');
-Alert::toast()->success('Message');
+
+`Alert::alert('Title', 'Message', 'Type');`
+
+`Alert::success('Success Title', 'Success Message');`
+
+`Alert::warning('Warning Title', 'Warning Message');`
+
+`Alert::error('Error Title', 'Error Message');`
+
+`Alert::question('Question Title', 'Question Message');`
+
+`Alert::toast('Toast Message', 'Toast Type');`
+
+`Alert::toast()->success('Message');`
 
 <p> To alert, and require confirm use the code below. </p>
 
+```
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
     <script>
@@ -84,3 +90,4 @@ Alert::toast()->success('Message');
             });
         });
     </script>
+ ```
