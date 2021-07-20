@@ -44,8 +44,9 @@ or
 Use Alert;
 
 <p>In your controller method use</p>
-
+```
 Alert::alert('Title', 'Message', 'Type');
+```
 Alert::success('Success Title', 'Success Message');
 Alert::warning('Warning Title', 'Warning Message');
 Alert::error('Error Title', 'Error Message');
