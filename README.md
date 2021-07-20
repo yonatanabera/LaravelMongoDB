@@ -1,62 +1,72 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+<h1>Sweet Alert laravel</h1>
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+<p><a href="https://realrashid.github.io/sweet-alert/install">Laravel sweet alert</a></p>
 
-## About Laravel
+<p>Use this link to include into your laravel project. </p>
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+composer require realrashid/sweet-alert
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+<p> Then add the following code into config/app service provider </p>
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+RealRashid\SweetAlert\SweetAlertServiceProvider::class,
 
-## Learning Laravel
+<p> Then add the following code to aliases </p>
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+'Alert' => RealRashid\SweetAlert\Facades\Alert::class,
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+<p>include the sweet alert, using this code into your main view/layout</p>
 
-## Laravel Sponsors
+@include('sweetalert::alert')
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+<p>publish the sweet alert using this command </p>
 
-### Premium Partners
+php artisan sweetalert:publish
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
+<p> To use, you can import in your control and use as follow </p>
 
-## Contributing
+use RealRashid\SweetAlert\Facades\Alert;
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+or 
 
-## Code of Conduct
+Use Alert;
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+<p>In your controller method use</p>
 
-## Security Vulnerabilities
+Alert::alert('Title', 'Message', 'Type');
+Alert::success('Success Title', 'Success Message');
+Alert::warning('Warning Title', 'Warning Message');
+Alert::error('Error Title', 'Error Message');
+Alert::question('Question Title', 'Question Message');
+Alert::toast('Toast Message', 'Toast Type');
+Alert::toast()->success('Message');
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
 
-## License
+<p> To alert, and require confirm use the code below. </p>
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script>
+        $('.delete-confirm').on('click', function (event) {
+            event.preventDefault();
+            const urls = $(this).parents()[0].attributes[0].value; //Get the URL of the form, which is about to be submitted
+            swal({
+                title: 'Are you sure?',
+                text: 'This record and it`s details will be permanantly deleted!',
+                icon: 'warning',
+                buttons: ["Cancel", "Yes!"],
+                
+            }).then(function(value) {
+                if (value) {
+                    $.ajax({
+                        headers: {
+                                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                },
+                        type: "DELETE",
+                        url: urls,
+                        success: function (data) {
+                                window.location.href={{ route('item.index') }};                 
+                            }         
+                    });
+                }
+            });
+        });
+    </script>

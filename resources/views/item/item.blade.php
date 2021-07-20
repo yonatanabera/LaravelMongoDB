@@ -37,7 +37,7 @@
                                         <form action="{{route('item.destroy', [$item->id])}}" method="post">
                                             @csrf
                                             <input type="hidden" name="_method" value="delete">
-                                            <button class="btn btn-sm btn-danger" type="submit"  onclick="return confirm('Are you sure you want to delete?')">Delete </button>
+                                            <button class="btn btn-sm btn-danger delete-confirm" type="submit"  >Delete </button>
                                             
                                         </form>
                                     </td>

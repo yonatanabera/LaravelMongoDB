@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Item; 
 use Session; 
+use RealRashid\SweetAlert\Facades\Alert;
 class ItemsController extends Controller
 {
     /**
@@ -62,8 +63,9 @@ class ItemsController extends Controller
 
             $item->save();
         */
+        Alert::toast()->success("Item inserted successfully");
        
-        return redirect(route('item.index'))->with("message", "New element added!");
+        return redirect(route('item.index'));
     }
 
     /**
@@ -102,7 +104,9 @@ class ItemsController extends Controller
     {
         //
         Item::find($id)->update($request->all());
-        return redirect(route('item.index'))->with("message", "Item Updated"); 
+        Alert::toast()->success("Item Updated successfully");
+        // Alert::success("Success", "Item updated");
+        return redirect(route('item.index')); 
     }
 
     /**
@@ -115,7 +119,9 @@ class ItemsController extends Controller
     {
         //
         Item::find($id)->delete();
-        return redirect(route('item.index'))->with('message', 'Item deleted successfully');
+        
+        Alert::toast()->success("Item deleted successfully");
+        return redirect(route('item.index'));
         
     }
 
